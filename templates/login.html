@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V14</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="WebUni Education Template">
+	<meta name="keywords" content="webuni, education, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="{{ url_for('static', filename ='img/favicon.ico') }}" rel="shortcut icon"/>
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+	
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename ='img/icons/favicon.ico') }}"/>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/utillogin.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/mainlogin.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename ='css/bootstrap.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename ='css/font-awesome.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename ='css/owl.carousel.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename ='css/style.css') }}"/>
+
+<body>
+
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<header class="header-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="site-logo">
+						<img src="{{ url_for('static', filename ='img/logo.png') }}" alt="">
+					</div>
+					<div class="nav-switch">
+						<i class="fa fa-bars"></i>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<a href="" class="site-btn header-btn">Login</a>
+					<nav class="main-menu">
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="#">About us</a></li>
+							<li><a href="courses">Courses</a></li>
+							<li><a href="blog">News</a></li>
+							<li><a href="contact">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="page-info-section set-bg" data-setbg="{{ url_for('static', filename ='img/page-bg/4.jpg') }}">
+		<div class="container">
+			<div class="site-breadcrumb">
+				<a href="/">Home</a>
+				<span>LogIn</span>
+			</div>
+		</div>
+	</div>
+
+
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+				<form class="login100-form validate-form flex-sb flex-w">
+					<span class="login100-form-title p-b-32">
+						Account Login
+					</span>
+
+					<span class="txt1 p-b-11">
+						Username
+					</span>
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+						<input class="input100" type="text" name="username" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<span class="txt1 p-b-11">
+						Password
+					</span>
+					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="flex-sb-m w-full p-b-48">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Remember me
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt3">
+								Forgot Password?
+							</a>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+
+
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Don't have an account!<br>Join our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="#" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+
+	
+	<footer class="footer-section spad pb-0">
+        <div class="footer-top">
+            <div class="footer-warp">
+                <div class="row">
+                    <div class="widget-item">
+                        <h4>Contact Info</h4>
+                        <ul class="contact-list">
+                            <li>1481 Creekside Lane <br>Avila Beach, CA 931</li>
+                            <li>+53 345 7953 32453</li>
+                            <li>yourmail@gmail.com</li>
+                        </ul>
+                    </div>
+                    <div class="widget-item">
+                        <h4>Engeneering</h4>
+                        <ul>
+                            <li><a href="">Applied Studies</a></li>
+                            <li><a href="">Computer Engeneering</a></li>
+                            <li><a href="">Software Engeneering</a></li>
+                            <li><a href="">Informational Engeneering</a></li>
+                            <li><a href="">System Engeneering</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-item">
+                        <h4>Graphic Design</h4>
+                        <ul>
+                            <li><a href="">Applied Studies</a></li>
+                            <li><a href="">Computer Engeneering</a></li>
+                            <li><a href="">Software Engeneering</a></li>
+                            <li><a href="">Informational Engeneering</a></li>
+                            <li><a href="">System Engeneering</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-item">
+                        <h4>Development</h4>
+                        <ul>
+                            <li><a href="">Applied Studies</a></li>
+                            <li><a href="">Computer Engeneering</a></li>
+                            <li><a href="">Software Engeneering</a></li>
+                            <li><a href="">Informational Engeneering</a></li>
+                            <li><a href="">System Engeneering</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-item">
+                        <h4>Newsletter</h4>
+                        <form class="footer-newslatter">
+                            <input type="email" placeholder="E-mail">
+                            <button class="site-btn">Subscribe</button>
+                            <p>*We don’t spam</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-warp">
+                <ul class="footer-menu">
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+                <div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+            </div>
+        </div>
+    </footer>
+
+    
+
+
+
+
+
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="{{ url_for('static', filename ='js/jquery-3.2.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename ='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename ='js/mixitup.min.js') }}"></script>
+	<script src="{{ url_for('static', filename ='js/circle-progress.min.js') }}"></script>
+	<script src="{{ url_for('static', filename ='js/owl.carousel.min.js' ) }}"></script>
+	<script src="{{ url_for('static', filename ='js/main.js') }}"></script>
+
+
+	
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename ='js/mainlogin.js') }}"></script>
+
+</body>
+</html>

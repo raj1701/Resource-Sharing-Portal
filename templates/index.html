@@ -1,0 +1,305 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+	<!-- Hero section -->
+	<section class="hero-section set-bg" data-setbg="{{ url_for('static', filename ='img/bg.jpg') }}">
+		<div class="container">
+			<div class="hero-text text-white">
+				<h2>Notes and Resourses</h2>
+				<h3>Get help from Seniors</h3>
+				<p>This postal provides you with the books, notes and other resourses put up by your seniors</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1">
+					<form class="intro-newslatter">
+						<input type="text" placeholder="Name">
+						<input type="text" class="last-s" placeholder="E-mail">
+						<button class="site-btn">Sign Up Now</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+
+	<!-- categories section -->
+
+
+
+	<section class="categories-section spad">
+		<div class="container">
+			<div class="section-title">
+				<h2>Course Department</h2>
+				<p>All the materials available are organised according to the Institute Departments. Select the Department you want to look into</p>
+			</div>
+			<div class="row">
+				<!-- categorie -->
+
+				{% for department in departments %}
+
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/categories/1.jpg') }}"></div>
+						<div class="ci-text">
+							<h5>{{ department.DeptName }}</h5>
+							<p>{{ department.DeptInfo }}</p>
+							<span>{{ department.NoOfCouses }}</span>
+						</div>
+					</div>
+				</div>
+				
+				{% endfor %}
+
+			</div>
+		</div>
+	</section>
+	<!-- categories section end -->
+
+
+
+
+
+	<!-- search section -->
+	<section class="search-section">
+		<div class="container">
+			<div class="search-warp">
+				<div class="section-title text-white">
+					<h2>Search your course</h2>
+				</div>
+				<div class="row">
+					<div class="col-md-10 offset-md-1">
+						<!-- search form -->
+						<form class="course-search-form">
+							<input type="text" placeholder="Course">
+							<input type="text" class="last-m" placeholder="Department">
+							<button class="site-btn">Search Couse</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- search section end -->
+
+
+	<!-- course section -->
+	<section class="course-section spad">
+		<div class="container">
+			<div class="section-title mb-0">
+				<h2>Popular Uploads</h2>
+				<p>Take a look at some of the most popular uploads by your Seniors</p>
+			</div>
+		</div>
+		<div class="course-warp">
+			<ul class="course-filter controls">
+				<li class="control active" data-filter="all">All</li>
+				<li class="control" data-filter=".cse">CSE</li>
+				<li class="control" data-filter=".it">IT</li>
+				<li class="control" data-filter=".ece">ECE</li>
+				<li class="control" data-filter=".eee">EEE</li>
+			</ul>                                       
+			<div class="row course-items-area">
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 cse">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/1.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>CSE Most popular course 1</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/1.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 it">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/2.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>IT Most Popular course 1</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/2.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 ece">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/3.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>ECE Most popular course 1</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/3.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 eee">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/4.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>EEE Most popular course 1</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/4.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 cse">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/5.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>CSE Most popular course 2</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/5.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 it">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/6.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>IT Most popular course 2</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/6.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 ece">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/7.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>ECE Most popular course 2</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/7.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- course -->
+				<div class="mix col-lg-3 col-md-4 col-sm-6 eee">
+					<div class="course-item">
+						<div class="course-thumb set-bg" data-setbg="{{ url_for('static', filename ='img/courses/8.jpg') }}">
+							<div class="price">Price: $15</div>
+						</div>
+						<div class="course-info">
+							<div class="course-text">
+								<h5>EEE Most popular course 2</h5>
+								<p>Lorem ipsum dolor sit amet, consectetur</p>
+								<div class="students">120 Students</div>
+							</div>
+							<div class="course-author">
+								<div class="ca-pic set-bg" data-setbg="{{ url_for('static', filename ='img/authors/8.jpg') }}"></div>
+								<p>William Parker, <span>Developer</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- course section end -->
+
+
+	<!-- signup section -->
+	<section class="signup-section spad">
+		<div class="signup-bg set-bg" data-setbg="{{ url_for('static', filename ='img/signup-bg.jpg') }}"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="signup-warp">
+						<div class="section-title text-white text-left">
+							<h2>Want to Upload and Help Juniors!!<br>Sign Up</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+						</div>
+						<!-- signup form -->
+						<form class="signup-form">
+							<input type="text" placeholder="Your Name">
+							<input type="text" placeholder="Your E-mail">
+							<input type="text" placeholder="Your Phone">
+							<label for="v-upload" class="file-up-btn">Upload Course</label>
+							<input type="file" id="v-upload">
+							<button class="site-btn">Search Couse</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- signup section end -->
+
+
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join Our Community Now!</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="#" class="site-btn">Register Now</a>
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+
+
+	{% endblock %}
