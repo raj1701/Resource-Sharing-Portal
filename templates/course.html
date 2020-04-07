@@ -1,130 +1,137 @@
-{% extends "layout.html" %}
-{% block body %}
+{% extends "layout.html" %} {% block body %} {% for Course in CourseInfo %}
 
-
-
-    <!-- Page info -->
-    <div class="page-info-section set-bg" data-setbg="img/page-bg/2.jpg">
-        <div class="container">
-            <div class="site-breadcrumb">
-                <a href="#">Home</a>
-                <span>Courses</span>
-            </div>
-        </div>
+<!-- Page info -->
+<div class="page-info-section set-bg" data-setbg="/static/img/page-bg/2.jpg">
+  <div class="container">
+    <div class="site-breadcrumb">
+      <a href="#">Home</a>
+      <span>{{ Course.CCode }}</span>
     </div>
-    <!-- Page info end -->
+  </div>
+</div>
+<!-- Page info end -->
 
+<!-- single course section -->
+<section class="single-course spad pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1 course-list">
+        <div class="cl-item">
+          <h1>{{ Course.Cname }}</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et
+            nunc eu efficitur. Sed ligula nulla, molestie quis ligula in,
+            eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie,
+            massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean
+            vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet
+            tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet,
+            consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula
+            nulla, molestie quis ligula in, eleifend rhoncus ipsum.
+          </p>
+        </div>
+        <div class="cl-item">
+          <h4>Certification</h4>
+          <p>
+            Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla,
+            molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem
+            vel efficitur molestie, massa nisl posuere ipsum, ut vulputate
+            mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum.
+            Nunc vulputate aliquet tristique. Integer et pellentesque urna.
+            Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et
+            nunc eu efficitur. Sed ligula nulla, molestie quis ligula in,
+            eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie,
+            massa nisl posuere ipsum.
+          </p>
+        </div>
+        <div class="cl-item">
+          <h4>The Instructor</h4>
+          <p>
+            Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum.
+            Donec ultrices, sem vel efficitur molestie, massa nisl posuere
+            ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam,
+            sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et
+            pellentesque urna. Lorem ipsum dolor sit amet, consectetur.
+            Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla,
+            molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem
+            vel efficitur molestie, massa nisl posuere ipsum, ut vulputate
+            mauris ligula a metus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- single course section end -->
 
+<!-- Page -->
+<section class="categories-section spad">
+  <div class="container">
+    <div class="section-title">
+      <h2>Available Resources</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada
+        lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula
+        sapien. Suspendisse cursus faucibus finibus.
+      </p>
+    </div>
+    <div class="row">
+      {% for Resource in ResourceInfo %}
+      <!-- categorie -->
+      <div class="col-lg-4 col-md-6">
+        <div class="categorie-item">
+          <div
+            class="ci-thumb set-bg"
+            data-setbg="/static/img/categories/1.jpg"
+          ></div>
+          <div class="ci-text">
+            <a href="courses"><h5>{{ Resource.RName }}</h5></a>
+            <p>{{ Resource.RDescription }}</p>
+            <span>120 Courses</span>
+          </div>
+        </div>
+      </div>
 
-    <!-- single course section -->
-	<section class="single-course spad pb-0">
-		<div class="container">
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- Page end -->
 
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1 course-list">
-					<div class="cl-item">
-						<h1>Course Name</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. </p>
-					</div>
-					<div class="cl-item">
-						<h4>Certification</h4>
-						<p>Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum.</p>
-					</div>
-					<div class="cl-item">
-						<h4>The Instructor</h4>
-						<p>Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. </p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- single course section end -->
+<!-- signup section -->
+<section class="signup-section spad">
+  <div class="signup-bg set-bg" data-setbg="/static/img/signup-bg.jpg"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="signup-warp">
+          <div class="section-title text-white text-left">
+            <h2>Upload Resource</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              malesuada lorem maximus mauris scelerisque, at rutrum nulla
+              dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.
+            </p>
+          </div>
+          <!-- signup form -->
+          <form
+            class="signup-form"
+            action="/uploader"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <input type="text" placeholder="Your Name" />
+            <input type="text" placeholder="Resource Name" />
+            <input type="text" placeholder="Resource Description" />
+            <input type="file" name="file1" class="site-btn btn-fade" />
+            <button type="submit" class="site-btn mr-0 mb-0 mb-md-0">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- signup section end -->
 
-
-
-    <!-- Page -->
-	<section class="categories-section spad">
-		<div class="container">
-			<div class="section-title">
-				<h2>Available Resources</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-			</div>
-			<div class="row">
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item" >
-						<div class="ci-thumb set-bg" data-setbg="img/categories/1.jpg"></div>
-						<div class="ci-text">
-                            <a href ="courses.html"><h5>IT Development</h5></a>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>120 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/2.jpg"></div>
-						<div class="ci-text">
-							<h5>Web Design</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>70 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/3.jpg"></div>
-						<div class="ci-text">
-							<h5>Illustration & Drawing</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>55 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/4.jpg"></div>
-						<div class="ci-text">
-							<h5>Social Media</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>40 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/5.jpg"></div>
-						<div class="ci-text">
-							<h5>Photoshop</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>220 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/6.jpg"></div>
-						<div class="ci-text">
-							<h5>Cryptocurrencies</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>25 Courses</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-    <!-- Page end -->
-    
-
-    
-
-
-
-
-{% endblock %}
+{% endfor %} {% endblock %}

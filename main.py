@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
 import json
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
+import os
 
 
 
@@ -14,7 +16,7 @@ with open('config.json', 'r') as c:
 
 app = Flask(__name__)
 
-
+app.config['UPLOAD_FOLDER'] = 'static/Resources'
 app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -52,9 +54,20 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route("/courses")
-def courses():
-    return render_template('courses.html')
+@app.route("/course")
+def course():
+
+    crs = request.args.get("crs", 0)
+    
+    q = "select * from Resources where CCode='"+crs+"'"
+    ResourceInfo = db.engine.execute(q)
+
+    q = "select * from Course where CCode='"+crs+"'"
+    CourseInfo = db.engine.execute(q)
+
+
+
+    return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
 
 
 @app.route("/Dept")
@@ -89,12 +102,28 @@ def Dept():
 
 
 
+@app.route("/uploader", methods=['GET', 'POST'])
+def uploader():
+    if (request.method == 'POST'):
+
+        f = request.files['file1']
+
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
+
+        f.save(file_path)
+
+        return "UPloaded Successfully"
+
+
 
 @app.route("/login")
 def login():
     form = LoginForm()
 
     return render_template('login.html', form = form)
+
+
+
 
 
 if __name__=='__main__':
