@@ -105,7 +105,7 @@
       <div class="col-lg-6">
         <div class="signup-warp">
           <div class="section-title text-white text-left">
-            <h2>Upload Resource</h2>
+            <h2>Upload Resource<br />for {{ Course.CCode }}</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
               malesuada lorem maximus mauris scelerisque, at rutrum nulla
@@ -115,13 +115,13 @@
           <!-- signup form -->
           <form
             class="signup-form"
-            action="/uploader"
+            action="/uploader?crs={{ Course.CCode }}"
             method="post"
             enctype="multipart/form-data"
           >
-            <input type="text" placeholder="Your Name" />
-            <input type="text" placeholder="Resource Name" />
-            <input type="text" placeholder="Resource Description" />
+            <input type="text" placeholder="Your Name" name="name" />
+            <input type="text" placeholder="Resource Name" name="rname" />
+            <input type="text" placeholder="Resource Description" name="rdes" />
             <input type="file" name="file1" class="site-btn btn-fade" />
             <button type="submit" class="site-btn mr-0 mb-0 mb-md-0">
               Submit

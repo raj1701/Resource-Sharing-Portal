@@ -24,6 +24,19 @@ db = SQLAlchemy(app)
 app.secret_key = 'key'
 
 
+class Uploaders(db.Model):
+    UNumber = db.Column(db.Integer, primary_key=True)
+    Dname = db.Column(db.String(20), unique=False, nullable=True)
+
+
+class Resources(db.Model):
+    Rno = db.Column(db.Integer, primary_key=True)
+    Rname = db.Column(db.String(20), unique=False, nullable=True)
+    RDescription = db.Column(db.String(100), unique=False, nullable=True)
+    CCode = db.Column(db.String(20), unique=False, nullable=True)
+    UNumber = db.Column(db.Integer)
+    filepath = db.Column(db.String(100), unique=False, nullable=True)
+
 class department(db.Model):
     DCode = db.Column(db.Integer, primary_key=True)
     Dname = db.Column(db.String(50), unique=True, nullable = False)
@@ -105,6 +118,23 @@ def Dept():
 @app.route("/uploader", methods=['GET', 'POST'])
 def uploader():
     if (request.method == 'POST'):
+
+        name = request.form.get('name')
+        rname = request.form.get('rname')
+        rdes = request.form.get('rdes')
+
+        crs = request.args.get("crs", 0)
+
+        q = "select count(*) from Uploaders where UName='"+name+"'"
+
+        Uplds = db.engine.execute(q)
+
+        for Upld in Uplds:
+            
+            if Upld[0]==0:
+                q = "insert into Uploaders (Uname) values ('"+name+"')"
+                db.engine.execute(q)
+                
 
         f = request.files['file1']
 
