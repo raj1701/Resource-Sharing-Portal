@@ -8,8 +8,6 @@ from wtforms.validators import InputRequired, Email, Length
 import os
 
 
-
-
 with open('config.json', 'r') as c:
     params = json.load(c)["params"]
 
@@ -26,7 +24,7 @@ app.secret_key = 'key'
 
 class Uploaders(db.Model):
     UNumber = db.Column(db.Integer, primary_key=True)
-    Dname = db.Column(db.String(20), unique=False, nullable=True)
+    Dname = db.Column(db.String(20), unique=True, nullable=True)
 
 
 class Resources(db.Model):
@@ -37,23 +35,26 @@ class Resources(db.Model):
     UNumber = db.Column(db.Integer)
     filepath = db.Column(db.String(100), unique=False, nullable=True)
 
+
 class department(db.Model):
     DCode = db.Column(db.Integer, primary_key=True)
-    Dname = db.Column(db.String(50), unique=True, nullable = False)
+    Dname = db.Column(db.String(50), unique=True, nullable=False)
     Ddes = db.Column(db.String(200), unique=False, nullable=False)
-    ImgLink = db.Column(db.String(50), unique = False, nullable=False)
+    ImgLink = db.Column(db.String(50), unique=False, nullable=False)
 
 
 class Course(db.Model):
     CCode = db.Column(db.String(20), primary_key=True)
-    Cname = db.Column(db.String(200), unique=True, nullable = False)
+    Cname = db.Column(db.String(200), unique=True, nullable=False)
     DCode = db.Column(db.Integer, unique=False, nullable=False)
 
-class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=3, max=80)])
-    remember = BooleanField('remember me')
 
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[
+                           InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[
+                             InputRequired(), Length(min=3, max=80)])
+    remember = BooleanField('remember me')
 
 
 @app.route("/")
@@ -71,34 +72,32 @@ def contact():
 def course():
 
     crs = request.args.get("crs", 0)
-    
+
     q = "select * from Resources where CCode='"+crs+"'"
     ResourceInfo = db.engine.execute(q)
 
     q = "select * from Course where CCode='"+crs+"'"
     CourseInfo = db.engine.execute(q)
 
-
-
     return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
 
 
 @app.route("/Dept")
 def Dept():
-    dept = request.args.get("dept",0)
-    if dept=="CSE":
+    dept = request.args.get("dept", 0)
+    if dept == "CSE":
         q = "select * from department where DCode=1"
         DeptInfo = db.engine.execute(q)
 
         q = "select * from Course where DCode=1"
         DeptCourse = db.engine.execute(q)
-    elif dept=="IT":
+    elif dept == "IT":
         q = "select * from department where DCode=2"
         DeptInfo = db.engine.execute(q)
 
         q = "select * from Course where DCode=2"
         DeptCourse = db.engine.execute(q)
-    elif dept=="ECE":
+    elif dept == "ECE":
         q = "select * from department where DCode=3"
         DeptInfo = db.engine.execute(q)
 
@@ -112,7 +111,6 @@ def Dept():
         DeptCourse = db.engine.execute(q)
 
     return render_template('department.html', DeptInfo=DeptInfo, DeptCourse=DeptCourse)
-
 
 
 @app.route("/uploader", methods=['GET', 'POST'])
@@ -130,33 +128,40 @@ def uploader():
         Uplds = db.engine.execute(q)
 
         for Upld in Uplds:
-            
-            if Upld[0]==0:
+
+            if Upld[0] == 0:
                 q = "insert into Uploaders (Uname) values ('"+name+"')"
                 db.engine.execute(q)
-                
+
+        q = "select UNumber from Uploaders where UName='"+name+"'"
+        unums = db.engine.execute(q)
+
+        upnum = 0
+
+        for unum in unums:
+            upnum = unum[0]
 
         f = request.files['file1']
 
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
+        file_path = os.path.join(
+            app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
 
         f.save(file_path)
 
-        return "UPloaded Successfully"
+        q = "insert into Resources (Rname, RDescription, CCode, UNumber, filepath) values ('" + \
+            rname+"', '"+rdes+"', '"+crs+"', "+str(upnum)+",'"+file_path+"')"
 
+        db.engine.execute(q)
+
+        return "UPloaded Successfully"
 
 
 @app.route("/login")
 def login():
     form = LoginForm()
 
-    return render_template('login.html', form = form)
+    return render_template('login.html', form=form)
 
 
-
-
-
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(debug=True)
-
-
