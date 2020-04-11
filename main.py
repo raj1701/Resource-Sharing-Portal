@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 import os
+from flask import send_file
 
 
 with open('config.json', 'r') as c:
@@ -153,7 +154,30 @@ def uploader():
 
         db.engine.execute(q)
 
-        return "UPloaded Successfully"
+        q = "select * from Resources where CCode='"+crs+"'"
+        ResourceInfo = db.engine.execute(q)
+
+        q = "select * from Course where CCode='"+crs+"'"
+        CourseInfo = db.engine.execute(q)
+
+        return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
+
+
+@app.route("/download")
+def download():
+
+    crs = request.args.get("res", 0)
+
+    q = "select filepath from Resources where Rno="+str(crs)+""
+
+    paths = db.engine.execute(q)
+
+    filepath = "x"
+
+    for path in paths:
+        filepath = path[0]
+
+    return send_file(filepath, as_attachment=True)
 
 
 @app.route("/login")
