@@ -182,9 +182,8 @@ def download():
 
 @app.route("/login")
 def login():
-    form = LoginForm()
 
-    return render_template('login.html', form=form)
+    return render_template('login.html')
 
 
 if __name__ == '__main__':
