@@ -86,7 +86,7 @@
           <div class="ci-text">
             <a href="courses"><h5>{{ Resource.RName }}</h5></a>
             <p>{{ Resource.RDescription }}</p>
-            <a href="/download?res={{ Resource.Rno }}"
+            <a href="/download/{{ Resource.Rno }}"
               ><button class="site-btn btn-dark">Download</button></a
             >
           </div>
@@ -117,7 +117,7 @@
           <!-- signup form -->
           <form
             class="signup-form"
-            action="/uploader?crs={{ Course.CCode }}"
+            action="/uploader/{{ Course.CCode }}"
             method="post"
             enctype="multipart/form-data"
           >

@@ -1,12 +1,10 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 import json
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length
 import os
 from flask import send_file
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 
 with open('config.json', 'r') as c:
@@ -21,6 +19,9 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
 app.secret_key = 'key'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 class Uploaders(db.Model):
@@ -50,12 +51,13 @@ class Course(db.Model):
     DCode = db.Column(db.Integer, unique=False, nullable=False)
 
 
-class LoginForm(FlaskForm):
-    username = StringField('username', validators=[
-                           InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[
-                             InputRequired(), Length(min=3, max=80)])
-    remember = BooleanField('remember me')
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Username = db.Column(db.String(50), unique=True, nullable=False)
+    FirstName = db.Column(db.String(50), unique=False, nullable=False)
+    LastName = db.Column(db.String(50), unique=False, nullable=False)
+    Email = db.Column(db.String(50), unique=True, nullable=False)
+    Password = db.Column(db.String(50), unique=False, nullable=False)
 
 
 @app.route("/")
@@ -64,15 +66,40 @@ def home():
     return render_template('index.html', params=params, Departments=Departments)
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    if (request.method == 'POST'):
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = User.query.filter(User.Username.in_(
+            [username]), User.Password.in_([password])).first()
+
+        if user:
+            login_user(user)
+            return redirect("/")
+        else:
+            return "Wrong username or password"
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return "You are logged out"
+
+
 @app.route("/contact")
 def contact():
     return render_template('contact.html')
 
 
-@app.route("/course")
-def course():
-
-    crs = request.args.get("crs", 0)
+@app.route("/course/<string:crs>")
+def course(crs):
 
     q = "select * from Resources where CCode='"+crs+"'"
     ResourceInfo = db.engine.execute(q)
@@ -83,9 +110,8 @@ def course():
     return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
 
 
-@app.route("/Dept")
-def Dept():
-    dept = request.args.get("dept", 0)
+@app.route("/Dept/<string:dept>")
+def Dept(dept):
     if dept == "CSE":
         q = "select * from department where DCode=1"
         DeptInfo = db.engine.execute(q)
@@ -114,15 +140,13 @@ def Dept():
     return render_template('department.html', DeptInfo=DeptInfo, DeptCourse=DeptCourse)
 
 
-@app.route("/uploader", methods=['GET', 'POST'])
-def uploader():
+@app.route("/uploader/<string:crs>", methods=['GET', 'POST'])
+def uploader(crs):
     if (request.method == 'POST'):
 
         name = request.form.get('name')
         rname = request.form.get('rname')
         rdes = request.form.get('rdes')
-
-        crs = request.args.get("crs", 0)
 
         q = "select count(*) from Uploaders where UName='"+name+"'"
 
@@ -154,19 +178,21 @@ def uploader():
 
         db.engine.execute(q)
 
-        q = "select * from Resources where CCode='"+crs+"'"
-        ResourceInfo = db.engine.execute(q)
+        flash('Resource Succesfully Uploaded')
 
-        q = "select * from Course where CCode='"+crs+"'"
-        CourseInfo = db.engine.execute(q)
+        return redirect('course?crs='+crs+'')
 
-        return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
+        # q = "select * from Resources where CCode='"+crs+"'"
+        # ResourceInfo = db.engine.execute(q)
+
+        # q = "select * from Course where CCode='"+crs+"'"
+        # CourseInfo = db.engine.execute(q)
+
+        # return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
 
 
-@app.route("/download")
-def download():
-
-    crs = request.args.get("res", 0)
+@app.route("/download/<string:crs>")
+def download(crs):
 
     q = "select filepath from Resources where Rno="+str(crs)+""
 
@@ -180,10 +206,10 @@ def download():
     return send_file(filepath, as_attachment=True)
 
 
-@app.route("/login")
-def login():
+# @app.route("/login")
+# def login():
 
-    return render_template('login.html')
+#     return render_template('login.html')
 
 
 if __name__ == '__main__':
