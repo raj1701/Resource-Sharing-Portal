@@ -1,105 +1,78 @@
 {% extends "layout.html" %} {% block body %} {% for dept in DeptInfo %}
 
-<!-- Page info -->
-<div
-  class="page-info-section set-bg"
-  data-setbg="{{ url_for('static', filename ='img/page-bg/2.jpg') }}"
->
-  <div class="container">
-    <div class="site-breadcrumb">
-      <a href="#">Home</a>
-      <span>{{ dept.Dname }}</span>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ dept.Dname }}</li>
+  </ol>
+</nav>
+
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="row row-content">
+    <div class="col-12">
+      <img src="{{ dept.ImgLink }}" alt="" class="course-preview" />
     </div>
+  </div>
+  <div class="row row-content">
+    <h1>{{ dept.Ddes }}</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu
+      efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus
+      ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere
+      ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam, sed
+      bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque
+      urna. Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et
+      nunc eu efficitur. Sed ligula nulla, molestie quis ligula in, eleifend
+      rhoncus ipsum.
+    </p>
+  </div>
+  <div class="row row-content">
+    <h4>Certification</h4>
+    <p>
+      Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie
+      quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur
+      molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus.
+      Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet
+      tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet,
+      consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula
+      nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices,
+      sem vel efficitur molestie, massa nisl posuere ipsum.
+    </p>
+  </div>
+  <div class="row row-content">
+    <h4>The Instructor</h4>
+    <p>
+      Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec
+      ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut
+      vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum
+      ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna.
+      Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu
+      efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus
+      ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere
+      ipsum, ut vulputate mauris ligula a metus.
+    </p>
   </div>
 </div>
-<!-- Page info end -->
 
-<!-- single course section -->
-<section class="single-course spad pb-0">
-  <div class="container">
-    <img src="{{ dept.ImgLink }}" alt="" class="course-preview" />
-    <div class="row">
-      <div class="col-lg-10 offset-lg-1 course-list">
-        <div class="cl-item">
-          <h1>{{ dept.Ddes }}</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et
-            nunc eu efficitur. Sed ligula nulla, molestie quis ligula in,
-            eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie,
-            massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean
-            vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet
-            tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet,
-            consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula
-            nulla, molestie quis ligula in, eleifend rhoncus ipsum.
-          </p>
-        </div>
-        <div class="cl-item">
-          <h4>Certification</h4>
-          <p>
-            Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla,
-            molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem
-            vel efficitur molestie, massa nisl posuere ipsum, ut vulputate
-            mauris ligula a metus. Aenean vel congue diam, sed bibendum ipsum.
-            Nunc vulputate aliquet tristique. Integer et pellentesque urna.
-            Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et
-            nunc eu efficitur. Sed ligula nulla, molestie quis ligula in,
-            eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur molestie,
-            massa nisl posuere ipsum.
-          </p>
-        </div>
-        <div class="cl-item">
-          <h4>The Instructor</h4>
-          <p>
-            Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum.
-            Donec ultrices, sem vel efficitur molestie, massa nisl posuere
-            ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam,
-            sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et
-            pellentesque urna. Lorem ipsum dolor sit amet, consectetur.
-            Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla,
-            molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem
-            vel efficitur molestie, massa nisl posuere ipsum, ut vulputate
-            mauris ligula a metus.
-          </p>
-        </div>
-      </div>
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="row row-content">
+    <div class="col-12" style="text-align: center;">
+      <h1>Available Courses</h1>
     </div>
   </div>
-</section>
-<!-- single course section end -->
-
-{% endfor %}
-
-<!-- Page -->
-<section class="categories-section spad">
-  <div class="container">
-    <div class="section-title">
-      <h2>Available Courses</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada
-        lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula
-        sapien. Suspendisse cursus faucibus finibus.
-      </p>
-    </div>
-    <div class="row">
-      {% for Course in DeptCourse %}
-
-      <!-- categorie -->
-      <div class="col-lg-3 col-md-6">
+  <div class="row row-content">
+    {% for Course in DeptCourse %}
+    <div class="col-6 col-md-4">
+      <div class="card card-dept">
         <a href="/course/{{ Course.CCode }}">
-          <div class="course-item">
-            <div class="course-text">
-              <h5>{{ Course.CCode }}</h5>
-              <p>{{ Course.Cname }}</p>
-            </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ Course.CCode }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ Course.Cname }}</h6>
           </div>
         </a>
       </div>
-      <!-- categorie -->
-
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
-</section>
-<!-- Page end -->
-
-{% endblock %}
+</div>
+{% endfor %} {% endblock %}

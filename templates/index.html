@@ -1,13 +1,10 @@
 {% extends "layout.html" %} {% block body %}
 
-<!-- Hero section -->
-<section
-  class="hero-section set-bg"
-  data-setbg="{{ url_for('static', filename ='img/background.jpg') }}"
->
+<div class="jumbotron jumbotron-fluid jumbo-index"
+  style="background-image: url({{ url_for('static', filename ='img/background.jpg') }}); background-size: cover;">
   <div class="container">
-    <div class="hero-text text-white">
-      <h2>Notes and Resourses</h2>
+    <div class="hero-text">
+      <h1>Notes and Resourses</h1>
       <h3>Get help from Seniors</h3>
       <p>
         This postal provides you with the books, notes and other resourses put
@@ -15,263 +12,31 @@
       </p>
     </div>
   </div>
-</section>
-<!-- Hero section end -->
+</div>
 
-<!-- categories section -->
-
-<section class="categories-section spad">
-  <div class="container">
-    <div class="section-title">
-      <h2>Course Department</h2>
-      <p>
-        All the materials available are organised according to the Institute
-        Departments. Select the Department you want to look into
-      </p>
-    </div>
-    <div class="row">
-      <!-- categorie -->
-
-      {% for department in Departments %}
-
-      <div class="col-lg-6 col-md-6">
-        <a href="Dept/{{ department.Dname }}"
-          ><div class="index-item">
-            <img src="{{ department.ImgLink }}" />
-            <div class="index-text">
-              <h5>{{ department.Dname }}</h5>
-              <p>{{ department.Ddes }}</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      {% endfor %}
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class=" row row-section1">
+    <div class="col">
+      <h1>Departments</h1>
     </div>
   </div>
-</section>
-<!-- categories section end -->
-
-<!-- course section -->
-<section class="course-section spad">
-  <div class="container">
-    <div class="section-title mb-0">
-      <h2>Popular Uploads</h2>
-      <p>Take a look at some of the most popular uploads by your Seniors</p>
+  <div class="row row-section1">
+    <div class="col">
+      <p>Browse through your Department</p>
     </div>
   </div>
-  <div class="course-warp">
-    <ul class="course-filter controls">
-      <li class="control active" data-filter="all">All</li>
-      <li class="control" data-filter=".cse">CSE</li>
-      <li class="control" data-filter=".it">IT</li>
-      <li class="control" data-filter=".ece">ECE</li>
-      <li class="control" data-filter=".eee">EEE</li>
-    </ul>
-    <div class="row course-items-area">
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 cse">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/1.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>CSE Most popular course 1</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/1.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
+  <div class="row">
+    {% for department in Departments %}
+    <div class="col-12 col-md-6">
+      <a href="Dept/{{ department.Dname }}">
+        <div class="card-section1" id="card-section1">
+          <img src="{{ department.ImgLink }}" />
+          <h3>{{ department.Ddes }}</h3>
         </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 it">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/2.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>IT Most Popular course 1</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/2.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 ece">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/3.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>ECE Most popular course 1</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/3.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 eee">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/4.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>EEE Most popular course 1</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/4.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 cse">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/5.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>CSE Most popular course 2</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/5.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 it">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/6.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>IT Most popular course 2</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/6.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 ece">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/7.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>ECE Most popular course 2</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/7.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- course -->
-      <div class="mix col-lg-3 col-md-4 col-sm-6 eee">
-        <div class="course-item">
-          <div
-            class="course-thumb set-bg"
-            data-setbg="{{ url_for('static', filename ='img/courses/8.jpg') }}"
-          >
-            <div class="price">Price: $15</div>
-          </div>
-          <div class="course-info">
-            <div class="course-text">
-              <h5>EEE Most popular course 2</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur</p>
-              <div class="students">120 Students</div>
-            </div>
-            <div class="course-author">
-              <div
-                class="ca-pic set-bg"
-                data-setbg="{{ url_for('static', filename ='img/authors/8.jpg') }}"
-              ></div>
-              <p>William Parker, <span>Developer</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
     </div>
+    {% endfor %}
   </div>
-</section>
-<!-- course section end -->
+</div>
 
 {% endblock %}

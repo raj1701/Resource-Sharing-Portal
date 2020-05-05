@@ -90,12 +90,65 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return "You are logged out"
+    return redirect("/")
+
+
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+    if (request.method == 'POST'):
+
+        username = request.form.get('username')
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        cnfpassword = request.form.get('cnfpassword')
+
+        q = "select Username from user"
+        usernames = db.engine.execute(q)
+
+        f = 0
+
+        for usrnm in usernames:
+            if usrnm[0] == username:
+                f = 1
+
+        q = "select Email from user"
+        emails = db.engine.execute(q)
+
+        for emls in emails:
+            if emls[0] == email:
+                f = 2
+
+        if cnfpassword == password:
+
+            if(f == 0):
+
+                q = "insert into user (Username, FirstName, LastName, Email, Password) values ('" + \
+                    username+"', '"+firstname+"', '"+lastname+"', '"+email+"', '"+password+"')"
+
+                db.engine.execute(q)
+
+                user = User.query.filter(User.Username.in_(
+                    [username]), User.Password.in_([password])).first()
+                login_user(user)
+                return redirect("/")
+
+            elif(f == 1):
+
+                return "Username already exists please enter a different username"
+
+            else:
+                return "Email already registered Please enter a different Email Address"
+
+        else:
+            return("Password and Confirm Password Fields should match")
 
 
 @app.route("/contact")
 def contact():
-    return render_template('contact.html')
+    Departments = department.query.filter_by().all()
+    return render_template('contact.html', Departments=Departments)
 
 
 @app.route("/course/<string:crs>")
@@ -107,7 +160,25 @@ def course(crs):
     q = "select * from Course where CCode='"+crs+"'"
     CourseInfo = db.engine.execute(q)
 
-    return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
+    q = "select DCode from Course where CCode='"+crs+"'"
+    Deptno = db.engine.execute(q)
+
+    deptno = 1
+
+    for dept in Deptno:
+        deptno = dept[0]
+
+    q = "select Dname from department where DCode="+str(deptno)+""
+    Deptname = db.engine.execute(q)
+
+    deptname = ""
+
+    for dept in Deptname:
+        deptname = dept[0]
+
+    Departments = department.query.filter_by().all()
+
+    return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo, deptname=deptname, Departments=Departments)
 
 
 @app.route("/Dept/<string:dept>")
@@ -137,58 +208,70 @@ def Dept(dept):
         q = "select * from Course where DCode=4"
         DeptCourse = db.engine.execute(q)
 
-    return render_template('department.html', DeptInfo=DeptInfo, DeptCourse=DeptCourse)
+    Departments = department.query.filter_by().all()
+
+    return render_template('department.html', DeptInfo=DeptInfo, DeptCourse=DeptCourse, Departments=Departments)
 
 
 @app.route("/uploader/<string:crs>", methods=['GET', 'POST'])
 def uploader(crs):
     if (request.method == 'POST'):
 
-        name = request.form.get('name')
         rname = request.form.get('rname')
         rdes = request.form.get('rdes')
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-        q = "select count(*) from Uploaders where UName='"+name+"'"
+        if current_user.is_authenticated:
 
-        Uplds = db.engine.execute(q)
+            if username == current_user.Username:
 
-        for Upld in Uplds:
+                user = User.query.filter(User.Username.in_(
+                    [username]), User.Password.in_([password])).first()
 
-            if Upld[0] == 0:
-                q = "insert into Uploaders (Uname) values ('"+name+"')"
-                db.engine.execute(q)
+                if user:
+                    q = "select count(*) from Uploaders where UName='" + \
+                        username+"'"
 
-        q = "select UNumber from Uploaders where UName='"+name+"'"
-        unums = db.engine.execute(q)
+                    Uplds = db.engine.execute(q)
 
-        upnum = 0
+                    for Upld in Uplds:
 
-        for unum in unums:
-            upnum = unum[0]
+                        if Upld[0] == 0:
+                            q = "insert into Uploaders (Uname) values ('" + \
+                                username+"')"
+                            db.engine.execute(q)
 
-        f = request.files['file1']
+                    q = "select UNumber from Uploaders where UName='"+username+"'"
+                    unums = db.engine.execute(q)
 
-        file_path = os.path.join(
-            app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
+                    upnum = 0
 
-        f.save(file_path)
+                    for unum in unums:
+                        upnum = unum[0]
 
-        q = "insert into Resources (Rname, RDescription, CCode, UNumber, filepath) values ('" + \
-            rname+"', '"+rdes+"', '"+crs+"', "+str(upnum)+",'"+file_path+"')"
+                    f = request.files['file1']
 
-        db.engine.execute(q)
+                    file_path = os.path.join(
+                        app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
 
-        flash('Resource Succesfully Uploaded')
+                    f.save(file_path)
 
-        return redirect('course?crs='+crs+'')
+                    q = "insert into Resources (Rname, RDescription, CCode, UNumber, filepath) values ('" + \
+                        rname+"', '"+rdes+"', '"+crs+"', " + \
+                        str(upnum)+",'"+file_path+"')"
 
-        # q = "select * from Resources where CCode='"+crs+"'"
-        # ResourceInfo = db.engine.execute(q)
+                    db.engine.execute(q)
 
-        # q = "select * from Course where CCode='"+crs+"'"
-        # CourseInfo = db.engine.execute(q)
+                    return redirect('/course/'+crs+'')
 
-        # return render_template('course.html', CourseInfo=CourseInfo, ResourceInfo=ResourceInfo)
+                else:
+                    return "Wrong username or password"
+            else:
+                return "Enter Correct Username"
+
+        else:
+            return "First Login to Upload"
 
 
 @app.route("/download/<string:crs>")
@@ -204,12 +287,6 @@ def download(crs):
         filepath = path[0]
 
     return send_file(filepath, as_attachment=True)
-
-
-# @app.route("/login")
-# def login():
-
-#     return render_template('login.html')
 
 
 if __name__ == '__main__':
