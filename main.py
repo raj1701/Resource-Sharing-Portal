@@ -81,9 +81,10 @@ def login():
 
         if user:
             login_user(user)
-            return redirect("/")
         else:
-            return "Wrong username or password"
+            flash("Wrong username or password")
+
+        return redirect("/")
 
 
 @app.route("/logout")
@@ -136,13 +137,16 @@ def signup():
 
             elif(f == 1):
 
-                return "Username already exists please enter a different username"
+                flash("Username already exists please enter a different username")
+                return redirect("/")
 
             else:
-                return "Email already registered Please enter a different Email Address"
+                flash("Email already registered Please enter a different Email Address")
+                return redirect("/")
 
         else:
-            return("Password and Confirm Password Fields should match")
+            flash("Password and Confirm Password Fields should match")
+            return redirect("/")
 
 
 @app.route("/contact")
@@ -263,15 +267,20 @@ def uploader(crs):
 
                     db.engine.execute(q)
 
+                    flash("Resource Successfully Uploaded")
+
                     return redirect('/course/'+crs+'')
 
                 else:
-                    return "Wrong username or password"
+                    flash("Wrong username or password")
+                    return redirect('/course/'+crs+'')
             else:
-                return "Enter Correct Username"
+                flash("Enter Correct Username")
+                return redirect('/course/'+crs+'')
 
         else:
-            return "First Login to Upload"
+            flash("First Login to Upload")
+            return redirect('/course/'+crs+'')
 
 
 @app.route("/download/<string:crs>")
