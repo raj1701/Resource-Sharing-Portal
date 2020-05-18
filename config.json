@@ -1,6 +1,0 @@
-{
-    "params":
-    {
-        "local_uri":"mysql+pymysql://DBMS_user:Octanef2@@localhost:3306/DBMS_Notes_Portal"
-    }
-}

@@ -5,16 +5,13 @@ import json
 import os
 from flask import send_file
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-
-
-with open('config.json', 'r') as c:
-    params = json.load(c)["params"]
+import config
 
 
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = 'static/Resources'
-app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
 app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
@@ -63,7 +60,7 @@ class User(UserMixin, db.Model):
 @app.route("/")
 def home():
     Departments = department.query.filter_by().all()
-    return render_template('index.html', params=params, Departments=Departments)
+    return render_template('index.html', Departments=Departments)
 
 
 @login_manager.user_loader
