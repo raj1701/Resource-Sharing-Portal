@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>{% load static %}
 <html lang="en">
 
 <head>
@@ -6,8 +6,8 @@
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->
-	<link href="{{ url_for('static', filename ='img/favicon.ico') }}" rel="shortcut icon" />
+	<!-- Favicon
+	
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i"
@@ -20,7 +20,10 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="{{ url_for('static', filename ='css/style.css') }}" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
 
 </head>
@@ -28,8 +31,7 @@
 <body>
 
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-		<a class="navbar-brand" href="#"><img src="{{ url_for('static', filename ='img/logo.png') }}" height="75"
-				width="75"></a>
+		<a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}" height="75" width="75"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -46,8 +48,8 @@
 						Departments
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						{% for department in Departments %}
-						<a class="dropdown-item" href="/Dept/{{ department.Dname }}">{{ department.Ddes }}</a>
+						{% for department in departments %}
+						<a class="dropdown-item" href="/Dept/{{ department.DName }}">{{ department.Ddes }}</a>
 						{% endfor %}
 					</div>
 				</li>
@@ -56,12 +58,12 @@
 				</li>
 			</ul>
 
-			{% if current_user.is_authenticated %}
+			{% if user.is_authenticated %}
 			<ul class="navbar-nav mr-5 order-3">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						{{ current_user.Username }}
+						{{ request.user }}
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/logout">Log Out</a>
@@ -70,7 +72,7 @@
 			</ul>
 			{% endif %}
 
-			{% if not current_user.is_authenticated %}
+			{% if not user.is_authenticated %}
 			<div class="order-3">
 				<a href="login" class="btn btn-primary" data-toggle="modal" data-target="#LoginModal">Login</a>
 				<a href="signup" class="btn btn-secondary" data-toggle="modal" data-target="#SignupModal">SignUp</a>
@@ -79,6 +81,15 @@
 
 		</div>
 	</nav>
+
+	{% for message in messages %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		{{ message }}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	{% endfor %}
 
 
 	<!-- Log in Modal -->
@@ -94,6 +105,7 @@
 				</div>
 				<div class="modal-body">
 					<form action="/login" method="post">
+						{% csrf_token %}
 						<div class="form-group">
 							<label for="Usename">Username</label>
 							<input type="text" class="form-control" id="Username" name="username"
@@ -126,6 +138,7 @@
 				</div>
 				<div class="modal-body">
 					<form action="/signup" method="post">
+						{% csrf_token %}
 						<div class="form-group">
 
 							<label for="Usename">Username</label>
@@ -184,31 +197,17 @@
 					<h5 class="py-1">Links</h5>
 					<ul class="list-unstyled">
 						<li class="py-1"><a class="a-dark-bg" href="/">Home</a></li>
+						<li class="py-1"><a class="a-dark-bg" href="/contact">Contact</a></li>
 					</ul>
 				</div>
 				<div class="col-12 col-md-4">
 					<h5 class="py-1">Departments</h5>
 					<ul class="list-unstyled">
-						{% for department in Departments %}
+						{% for department in departments %}
 						<li class="py-1"><a class="a-dark-bg"
-								href="/Dept/{{ department.Dname }}">{{ department.Ddes }}</a></li>
+								href="/Dept/{{ department.DName }}">{{ department.Ddes }}</a></li>
 						{% endfor %}
 					</ul>
-				</div>
-				<div class="col-12 col-sm-4 align-self-center">
-					<div class="text-center">
-						<a class="btn btn-social-icon btn-google" href="http://google.com/+"><i
-								class="fa fa-google-plus"></i></a>
-						<a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i
-								class="fa fa-facebook"></i></a>
-						<a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i
-								class="fa fa-linkedin"></i></a>
-						<a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i
-								class="fa fa-twitter"></i></a>
-						<a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i
-								class="fa fa-youtube"></i></a>
-						<a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o"></i></a>
-					</div>
 				</div>
 			</div>
 		</div>

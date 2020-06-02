@@ -1,0 +1,84 @@
+{% extends "layout.html" %} {% block body %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ department.DName }}</li>
+  </ol>
+</nav>
+
+<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="row row-content">
+    <div class="col-12">
+      <img src="/media/{{department.ImgLink }}" alt="" class="course-preview" />
+    </div>
+  </div>
+  <div class="row row-content">
+    <h1>{{ department.Ddes }}</h1>
+    <p style="margin-top: 100px; margin-bottom: 50px;">
+      {{department.Dinfo}}
+    </p>
+  </div>
+  <!-- <div class="row row-content">
+    <h4>Certification</h4>
+    <p>
+      Phasellus sollicitudin et nunc eu efficitur. Sed ligula nulla, molestie
+      quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur
+      molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus.
+      Aenean vel congue diam, sed bibendum ipsum. Nunc vulputate aliquet
+      tristique. Integer et pellentesque urna. Lorem ipsum dolor sit amet,
+      consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula
+      nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices,
+      sem vel efficitur molestie, massa nisl posuere ipsum.
+    </p>
+  </div>
+  <div class="row row-content">
+    <h4>The Instructor</h4>
+    <p>
+      Sed ligula nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec
+      ultrices, sem vel efficitur molestie, massa nisl posuere ipsum, ut
+      vulputate mauris ligula a metus. Aenean vel congue diam, sed bibendum
+      ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna.
+      Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu
+      efficitur. Sed ligula nulla, molestie quis ligula in, eleifend rhoncus
+      ipsum. Donec ultrices, sem vel efficitur molestie, massa nisl posuere
+      ipsum, ut vulputate mauris ligula a metus.
+    </p>
+  </div> -->
+</div>
+
+<div style="background-color: #E9ECEF; padding-top: 30px; padding-bottom: 30px;">
+  <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+    <div class="row row-content">
+      <div class="col-12" style="text-align: center;">
+        {% if crs %}
+        <h1>Available Courses</h1>
+        {% endif %}
+        {% if not crs %}
+        <h2 style="margin-top: 30px;"> Unfortunately No Courses Available for this Department </h2>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row row-content">
+
+      {% if crs %}
+
+      {% for course in courses %}
+      <div class="col-12 col-md-4">
+        <div class="card card-dept">
+          <a href="/course/{{ course.CCode }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ course.CCode }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ course.CName }}</h6>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}
