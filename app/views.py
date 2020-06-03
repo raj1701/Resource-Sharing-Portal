@@ -13,6 +13,7 @@ from django.contrib import messages
 
 def index(request):
     departments = Department.objects.all()
+
     params = {'departments': departments}
     return render(request, 'app/index.html', params)
 
@@ -212,3 +213,28 @@ def feedback(request):
         messages.success(request, "FeedBack Submitted")
 
         return redirect(request.META.get('HTTP_REFERER'))
+
+
+def crssrch(request):
+    if request.method == "POST":
+
+        ccode = request.POST['ccode']
+
+        crsresult = []
+
+        courses = Course.objects.all()
+
+        for course in courses:
+            if(ccode.lower() in course.CCode.lower() or ccode.lower() in course.CName.lower()):
+                crsresult.append(course)
+
+        result = True
+
+        if(len(crsresult) == 0):
+            result = False
+
+        departments = Department.objects.all()
+        params = {'departments': departments,
+                  'crsresult': crsresult, 'result': result}
+
+        return render(request, 'app/searchresults.html', params)
