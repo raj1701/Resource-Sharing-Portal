@@ -19,22 +19,22 @@
 					{% csrf_token %}
 					<div class="form-group">
 						<label for="name">Enter your Name</label>
-						<input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" />
+						<input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" / required>
 					</div>
 					<div class="form-group">
 						<label for="email">Email address</label>
 						<input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-							placeholder="Enter email" name="email">
+							placeholder="Enter email" name="email" required>
 						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
 							else.</small>
 					</div>
 					<div class="form-group">
 						<label for="subject">Subject</label>
-						<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" />
+						<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required />
 					</div>
 					<div class="form-group">
 						<label for="feedback">Your Feedback</label>
-						<textarea class="form-control" id="feedback" name="feedback" rows="8"></textarea>
+						<textarea class="form-control" id="feedback" name="feedback" rows="8" required></textarea>
 					</div>
 					<button type="submit" class="btn btn-dark">Send Feedback</button>
 

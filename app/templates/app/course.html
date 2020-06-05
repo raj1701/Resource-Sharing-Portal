@@ -106,23 +106,23 @@
             {% csrf_token %}
             <div class="form-group">
               <label for="Usename">Username</label>
-              <input type="text" class="form-control" id="Username" name="username" placeholder="Enter Username" />
+              <input type="text" class="form-control" id="Username" name="username" placeholder="Enter Username" required />
             </div>
             <div class="form-group">
               <label for="rname">Resource Title</label>
-              <input class="form-control" type="text" id="rname" placeholder="Resource Title" name="rname" />
+              <input class="form-control" type="text" id="rname" placeholder="Resource Title" name="rname" required />
             </div>
             <div class="form-group">
               <label for="rdes">Resource Description</label>
-              <input class="form-control" type="text" id="rdes" placeholder="Resource Description" name="rdes" />
+              <input class="form-control" type="text" id="rdes" placeholder="Resource Description" name="rdes" required />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input type="password" class="form-control" id="exampleInputPassword1" name="password"
-                placeholder="Password" />
+                placeholder="Password" required />
             </div>
             <div class="form-group">
-              <input type="file" name="file1" />
+              <input type="file" name="file1" required />
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-dark">Submit</button>
