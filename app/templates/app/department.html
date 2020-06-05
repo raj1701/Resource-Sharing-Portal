@@ -2,20 +2,22 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ department.DName }}</li>
   </ol>
 </nav>
 
 <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
   <div class="row row-content">
+    <h1 class="display-4 mb-5">{{ department.Ddes }}</h1>
+  </div>
+  <div class="row row-content">
     <div class="col-12">
       <img src="/media/{{department.ImgLink }}" alt="" class="course-preview" />
     </div>
   </div>
   <div class="row row-content">
-    <h1>{{ department.Ddes }}</h1>
-    <p style="margin-top: 100px; margin-bottom: 50px;">
+    <p style="margin-top: 70px; margin-bottom: 50px;">
       {{department.Dinfo}}
     </p>
   </div>
@@ -52,7 +54,7 @@
     <div class="row row-content">
       <div class="col-12" style="text-align: center;">
         {% if crs %}
-        <h1>Available Courses</h1>
+        <h1 class="display-4">Available Courses</h1>
         {% endif %}
         {% if not crs %}
         <h2 style="margin-top: 30px;"> Unfortunately No Courses Available for this Department </h2>

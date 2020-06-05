@@ -87,7 +87,8 @@ def signup(request):
 
                 django_login(request, user)
 
-                messages.success(request, 'Successfully Logged In')
+                messages.success(
+                    request, "Successfully Logged In as "+user.username+"")
                 return redirect("/")
 
             elif(f == 1):
@@ -116,7 +117,8 @@ def login(request):
 
         if user:
             django_login(request, user)
-            messages.success(request, 'Successfully Logged In')
+            messages.success(
+                request, "Successfully Logged In as "+user.username+"")
         else:
             messages.error(
                 request, 'Wrong username or password')
