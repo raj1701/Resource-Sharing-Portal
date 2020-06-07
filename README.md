@@ -32,6 +32,7 @@ pip install -r requirements.txt
 
 ### Running the website locally
 ```bash
+make Debug = True in the settings.py 
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
