@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import Department, Course, Uploader, Resource, Comment
+from .models import Department, Course, Uploader, Resource, Comment, Request
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
@@ -81,8 +81,8 @@ def signup(request):
             if(f == 0):
 
                 user = User.objects.create_user(username, email, password)
-                user.firstname = firstname
-                user.lastname = lastname
+                user.first_name = firstname
+                user.last_name = lastname
                 user.save()
 
                 django_login(request, user)
@@ -240,3 +240,44 @@ def crssrch(request):
                   'crsresult': crsresult, 'result': result}
 
         return render(request, 'app/searchresults.html', params)
+
+
+def deprequest(request):
+    if request.method == "POST":
+
+        reqdes = request.POST['reqdes']
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = request.user
+
+        if user.is_authenticated:
+
+            if username == user.username:
+
+                user = authenticate(username=username, password=password)
+
+                if user:
+
+                    depreq = Request(RDes=reqdes, Userno=user)
+                    depreq.save()
+
+                    messages.success(
+                        request, "Your Request has been Successfully Submitted")
+
+                    return redirect(request.META.get('HTTP_REFERER'))
+
+                else:
+                    messages.error(
+                        request, 'Wrong password')
+
+                    return redirect(request.META.get('HTTP_REFERER'))
+            else:
+                messages.error(
+                    request, 'Please Enter Valid Username')
+                return redirect(request.META.get('HTTP_REFERER'))
+
+        else:
+            messages.error(
+                request, 'First Login to Make Request')
+            return redirect(request.META.get('HTTP_REFERER'))

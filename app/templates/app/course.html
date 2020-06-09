@@ -97,7 +97,7 @@
   </div>
   <div class="row row-content justify-content-center">
     <div class="col-md-6">
-      <div class="card">
+      <div class="card card-form">
         <div class="card-header bg-dark text-white">
           <h2>Resource for {{ course.CCode }}</h2>
         </div>
@@ -106,7 +106,8 @@
             {% csrf_token %}
             <div class="form-group">
               <label for="Usename">Username</label>
-              <input type="text" class="form-control" id="Username" name="username" placeholder="Enter Username" required />
+              <input type="text" class="form-control" id="Username" name="username" placeholder="Enter Username"
+                required />
             </div>
             <div class="form-group">
               <label for="rname">Resource Title</label>
@@ -114,7 +115,8 @@
             </div>
             <div class="form-group">
               <label for="rdes">Resource Description</label>
-              <input class="form-control" type="text" id="rdes" placeholder="Resource Description" name="rdes" required />
+              <input class="form-control" type="text" id="rdes" placeholder="Resource Description" name="rdes"
+                required />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>

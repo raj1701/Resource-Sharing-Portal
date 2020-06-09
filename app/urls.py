@@ -12,4 +12,5 @@ urlpatterns = [
     path('contact', views.contact),
     path('feedback', views.feedback),
     path('crssrch', views.crssrch),
+    path('deprequest', views.deprequest),
 ]
