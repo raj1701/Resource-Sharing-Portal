@@ -7,6 +7,8 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 
@@ -84,6 +86,17 @@ def signup(request):
                 user.first_name = firstname
                 user.last_name = lastname
                 user.save()
+
+                # send_mail(subject, message, from_email, to_list, fail_silently=True)
+
+                subject = "Thank you for signing up with Resource Sharing Portal"
+                message = "Hi "+user.first_name+" "+user.last_name + \
+                    ",\nWelcome to Resources Sharing Portal!\nWe are Excited to serve you with the resources you are looking for."
+                from_email = settings.EMAIL_HOST_USER
+                to_list = [user.email, settings.EMAIL_HOST_USER]
+
+                send_mail(subject, message, from_email,
+                          to_list, fail_silently=True)
 
                 django_login(request, user)
 
