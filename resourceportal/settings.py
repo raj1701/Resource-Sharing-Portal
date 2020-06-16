@@ -33,7 +33,7 @@ EMAIL_PORT = EMAIL_PORT
 SECRET_KEY = '#tbbhm5^t8qc+p*=5w%yymdyozc=mkft2b$&(ym_&0jzmey$w_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
