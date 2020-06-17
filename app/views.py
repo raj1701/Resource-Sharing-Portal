@@ -185,6 +185,16 @@ def uploader(request, CCode):
 
                         resource.save()
 
+                    subject = "Resource Successfully Uploaded"
+                    message = "Hi "+user.first_name+" "+user.last_name + \
+                        ",\nThank you for uploading Resource and helping your juniors!\n\nYour Resource, " + \
+                        rname+" "+rdes+" for the course "+course.CCode+" has been successfully uploaded."
+                    from_email = settings.EMAIL_HOST_USER
+                    to_list = [user.email, settings.EMAIL_HOST_USER]
+
+                    send_mail(subject, message, from_email,
+                              to_list, fail_silently=True)
+
                     messages.success(request, "Resource Successfully Uploaded")
 
                     return redirect(request.META.get('HTTP_REFERER'))
@@ -224,6 +234,15 @@ def feedback(request):
                           Subject=Subject, Feedback=Feedback)
 
         comment.save()
+
+        subject = "New Feedback"
+        message = ""+Name+" submitted the feedback\n\nSubject : " + \
+            Subject+"\n\nFeedback : "+Feedback+""
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [settings.EMAIL_HOST_USER]
+
+        send_mail(subject, message, from_email,
+                  to_list, fail_silently=True)
 
         messages.success(request, "FeedBack Submitted")
 
@@ -274,6 +293,15 @@ def deprequest(request):
 
                     depreq = Request(RDes=reqdes, Userno=user)
                     depreq.save()
+
+                    subject = "New Request"
+                    message = ""+user.first_name+" "+user.last_name + \
+                        " posted the following request.\n\n"+reqdes+""
+                    from_email = settings.EMAIL_HOST_USER
+                    to_list = [settings.EMAIL_HOST_USER]
+
+                    send_mail(subject, message, from_email,
+                              to_list, fail_silently=True)
 
                     messages.success(
                         request, "Your Request has been Successfully Submitted")
