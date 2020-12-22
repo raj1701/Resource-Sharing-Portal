@@ -13,4 +13,7 @@ urlpatterns = [
     path('feedback', views.feedback),
     path('crssrch', views.crssrch),
     path('deprequest', views.deprequest),
+    path('resrequest',views.resrequest),
+    path('accounts/profile/',views.index),
+    path('Popularity_check',views.Popularity_check)
 ]

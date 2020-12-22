@@ -25,6 +25,7 @@ class Uploader(models.Model):
     UName = models.CharField(max_length=50)
 
 
+
 class Resource(models.Model):
     RNo = models.AutoField(primary_key=True)
     RName = models.CharField(max_length=100)
@@ -32,9 +33,18 @@ class Resource(models.Model):
     CCode = models.ForeignKey(Course, on_delete=models.CASCADE)
     UNumber = models.ForeignKey(Uploader, on_delete=models.CASCADE)
     filepath = models.FileField(upload_to="resources", default="")
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+    times_visited=models.IntegerField(default=0)
 
 
 class Request(models.Model):
+    ReqNo = models.AutoField(primary_key=True)
+    RDes = models.CharField(max_length=200)
+    Userno = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Request_res(models.Model):
     ReqNo = models.AutoField(primary_key=True)
     RDes = models.CharField(max_length=200)
     Userno = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -45,3 +55,5 @@ class Comment(models.Model):
     Email = models.CharField(max_length=50)
     Subject = models.CharField(max_length=200)
     Feedback = models.CharField(max_length=2000)
+
+
