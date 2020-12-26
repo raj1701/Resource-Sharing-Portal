@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import Department, Course, Uploader, Resource, Comment, Request
+from .models import Department, Course, Uploader, Resource, Comment, Request, Request_res
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
@@ -15,9 +15,9 @@ from django.conf import settings
 
 def index(request):
     departments = Department.objects.all()
-
-    params = {'departments': departments}
-    return render(request, 'app/index.html', params)
+    resources = Resource.objects.all().order_by('-created_at')[:5]   
+    popular_resources=Resource.objects.all().order_by('-times_visited')[:5]
+    return render(request, 'app/index.html', {'resources': resources, 'departments': departments, 'popular_resources': popular_resources})
 
 
 def dept(request, DName):
@@ -45,6 +45,7 @@ def Crs(request, CCode):
 
     course = Course.objects.filter(CCode=CCode)
     resources = Resource.objects.filter(CCode=CCode)
+
 
     rs = True
 
@@ -322,3 +323,64 @@ def deprequest(request):
             messages.error(
                 request, 'First Login to Make Request')
             return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+def resrequest(request):
+    if request.method == "POST":
+
+        reqdes = request.POST['reqdes']
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = request.user
+
+        if user.is_authenticated:
+
+            if username == user.username:
+
+                user = authenticate(username=username, password=password)
+
+                if user:
+
+                    resreq = Request_res(RDes=reqdes, Userno=user)
+                    resreq.save()
+
+                    subject = "New Request"
+                    message = ""+user.first_name+" "+user.last_name + \
+                        " posted the following request.\n\n"+reqdes+""
+                    from_email = settings.EMAIL_HOST_USER
+                    to_list = [settings.EMAIL_HOST_USER]
+
+                    send_mail(subject, message, from_email,
+                              to_list, fail_silently=True)
+
+                    messages.success(
+                        request, "Your Request has been Successfully Submitted")
+
+                    return redirect(request.META.get('HTTP_REFERER'))
+
+                else:
+                    messages.error(
+                        request, 'Wrong password')
+
+                    return redirect(request.META.get('HTTP_REFERER'))
+            else:
+                messages.error(
+                    request, 'Please Enter Valid Username')
+                return redirect(request.META.get('HTTP_REFERER'))
+
+        else:
+            messages.error(
+                request, 'First Login to Make Request')
+            return redirect(request.META.get('HTTP_REFERER'))
+
+def Popularity_check(request):
+    if request.method == "POST":
+        rno=int(request.POST['Resource_no'])
+        Resreq=Resource.objects.get(RNo=rno)
+        Resreq.times_visited+=1
+        Resreq.save()
+        return redirect(Resreq.filepath.url)
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))
