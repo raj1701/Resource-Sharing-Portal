@@ -83,9 +83,13 @@
               {% csrf_token %}
             <a href="{{ resource.filepath.url }}" target="_blank"><button class="btn btn-dark" value=" {{ resource.RNo }} " name="Resource_no" type="submit">Download </button></a>
             </form>
-          </div>
+            </div>
         </div>
       </div>
+
+                   
+
+ 
       {% endfor %}
       {% endif %}
     </div>
@@ -186,4 +190,5 @@
   </div>
 </div>
 <div>
+
 {% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn resourceportal.wsgi --log-file -
