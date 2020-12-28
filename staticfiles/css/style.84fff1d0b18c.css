@@ -1,0 +1,181 @@
+html,
+body {
+  height: 100%;
+  background-color: #f2f7f7;
+  font-family: "Raleway", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+
+p{
+
+  line-height: 2.2;
+  font-weight: 500;
+} 
+
+.display-4 {
+  font-weight: 600;
+}
+
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 76px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p {
+  font-size: 14.1px;
+
+  line-height: 2.2;
+  font-weight: 500;
+} */
+
+.a-dark-bg{
+  color: white;
+}
+
+.a-dark-bg:hover{
+  color: #d82a4e;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: #d82a4e;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* .jumbo-index {
+  height: 650px;
+
+} */
+
+.hero-text {
+  text-align: center;
+  /* padding-top: 20vw; */
+  color: white;
+}
+
+.row-section1 {
+  text-align: center;
+}
+
+.card-section1 {
+  background-color: white;
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.card-section1 img {
+  width: 100%;
+}
+
+.card-section1 h3 {
+  padding: 20px;
+}
+
+.card-section1:hover {
+  transform: scale(1.02);
+}
+
+.card-dept {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.card-dept:hover {
+  transform: scale(1.1);
+}
+
+.row-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+.card-form {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
+
+
