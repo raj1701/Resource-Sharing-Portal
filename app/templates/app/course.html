@@ -81,7 +81,7 @@
           <div class="card-footer">
             <form action="/Popularity_check" method="POST" enctype="multipart/form-data" >
               {% csrf_token %}
-            <a href="static/{{ resource.filepath.url }}" target="_blank"><button class="btn btn-dark" value=" {{ resource.RNo }} " name="Resource_no" type="submit">Download </button></a>
+            <a href="/static/resources/{{ resource.filepath.url }}" target="_blank"><button class="btn btn-dark" value=" {{ resource.RNo }} " name="Resource_no" type="submit">Download </button></a>
             </form>
             </div>
         </div>
