@@ -149,7 +149,7 @@ USE_TZ = True
 
 STATIC_HOST = 'https://d10gxcejxssdth.cloudfront.net' if not DEBUG else ''
 
-STATIC_URL = '/static/'
+STATIC_URL = STATIC_HOST + '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
