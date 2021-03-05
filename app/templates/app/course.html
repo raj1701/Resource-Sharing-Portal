@@ -64,36 +64,32 @@
       </div>
     </div>
     <div class="row row-content">
-      <div class="col-12 col-md-4">
-      {% if rs %}
-      {% for resource in resources %}
       
-        <div class="card card-dept">
-          <div class="card-header">
-            <h4>
-              {{ resource.RName }}
-            </h4>
-          </div>
-          <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">
-              {{ resource.RDes }}
-            </h6>
-          </div>
-          <div class="card-footer">
-            <form action="/Popularity_check" method="POST" enctype="multipart/form-data" >
-              {% csrf_token %}
-            <a href="{{ resource.filepath.url }}" target="_blank"><button class="btn btn-dark" value=" {{ resource.RNo }} " name="Resource_no" type="submit">Download </button></a>
-            </form>
+        {% if rs %}
+        {% for resource in resources %}
+        <div class="col-12 col-md-4">
+          <div class="card card-dept">
+            <div class="card-header">
+              <h4>
+                {{ resource.RName }}
+              </h4>
             </div>
-        </div>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">
+                {{ resource.RDes }}
+              </h6>
+            </div>
+            <div class="card-footer">
+              <form action="/Popularity_check" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+              <a href="{{ resource.filepath.url }}" target="_blank"><button class="btn btn-dark" value=" {{ resource.RNo }} " name="Resource_no" type="submit">Download </button></a>
+              </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        {% endif %}
       
-
-                   
-
- 
-      {% endfor %}
-      {% endif %}
-      </div>
     </div>
   </div>
 </div>
