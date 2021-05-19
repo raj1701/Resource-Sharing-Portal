@@ -2,7 +2,7 @@
 A Web App for students to upload and download Resources.
 
 ### Website
-[https://omanshu840.pythonanywhere.com/](https://omanshu840.pythonanywhere.com/)
+[https://resource-sharing-platform.herokuapp.com/](https://resource-sharing-platform.herokuapp.com/)
 
 ## Technology Stack
 
