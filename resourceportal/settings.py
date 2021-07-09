@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from .emailinfo import *
+from .config import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,10 +31,10 @@ EMAIL_PORT = EMAIL_PORT
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#tbbhm5^t8qc+p*=5w%yymdyozc=mkft2b$&(ym_&0jzmey$w_'
+SECRET_KEY = SECRET_KEY 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['resource-sharing-platform.herokuapp.com' , '127.0.0.1','resource-sharing-portal.herokuapp.com']
 
@@ -153,14 +154,12 @@ USE_TZ = True
 
 
 
-AWS_ACCESS_KEY_ID = 'AKIAXAJSYVY7L5C7U6WW'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'resource-sharing-platform'
-AWS_S3_CUSTOM_DOMAIN = 'resource-sharing-platform.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
+AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
+AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = AWS_S3_CUSTOM_DOMAIN
+AWS_S3_OBJECT_PARAMETERS = AWS_S3_OBJECT_PARAMETERS
+AWS_LOCATION = AWS_LOCATION
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
