@@ -35,7 +35,7 @@ EMAIL_PORT = EMAIL_PORT
 SECRET_KEY = SECRET_KEY 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['resource-sharing-platform.herokuapp.com' , '127.0.0.1','resource-sharing-portal.herokuapp.com']
 
